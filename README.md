@@ -12,18 +12,20 @@ docx 把"编号格式"和"编号序号"分开存放：
 
 所以直接用 `python-docx` 读 `paragraph.text`，只能拿到段落正文，看不到自动编号。本项目把 `numbering.xml` 解析出来，自己维护一份计数，把编号文本还原后拼回段落前面。
 
-## 使用
+## 运行示例
 
-```python
-from main import DocxReader
+```text
+=== python-docx 直接读取（不含自动编号） ===
+一级自动编号
+二级自动编号
+二级自动编号
+自动编号
+三、手动编号
 
-reader = DocxReader("test.docx")
-for p in reader.paragraphs:
-    print(p.text)
+=== DocxReader 读取（还原自动编号） ===
+一、一级自动编号
+（1）二级自动编号
+（2）二级自动编号
+二、自动编号
+三、手动编号
 ```
-
-直接运行 `main.py` 可以对比"原始读取"和"还原后"的差异。
-
-## 支持的编号格式
-
-decimal / decimalZero、upperLetter / lowerLetter、upperRoman / lowerRoman、ordinal、cardinalText / ordinalText、chineseCounting、chineseLegalSimplified、ideographTraditional、ideographZodiac。
